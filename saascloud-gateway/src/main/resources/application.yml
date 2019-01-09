@@ -1,0 +1,29 @@
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8769
+spring:
+  application:
+    name: saascloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+      - id: api-crm
+        uri: lb://saascloud-provider-crm-api
+        predicates:
+          - Path=/api-crm/**
+        filters:
+          - StripPrefix=1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}

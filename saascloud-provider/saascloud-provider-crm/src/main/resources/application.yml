@@ -1,0 +1,24 @@
+# 默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：
+#   测试环境：java -jar my-spring-boot.jar --spring.profiles.active=test
+#   生产环境：java -jar my-spring-boot.jar --spring.profiles.active=prod
+
+server:
+  port: 8888
+spring:
+  application:
+    name: saascloud-provider-crm
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://172.21.205.32:3306/hardcover_erp
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:com/jtl/services/saascloudprovidercrm/dao/*.xml
+  type-aliases-package: com.jtl.services.saascloudprovidercrm.entity
+  check-config-location: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
